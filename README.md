@@ -29,7 +29,7 @@ The expected outcomes include identifying key user segments, understanding spend
 2.1 Data Collection
 The data used for this project was collected from a platform that tracks user activities, including cooking sessions and food orders. The data is organized into three CSV files, each representing different aspects of user behavior.
 
-# Load the datasets
+Load the datasets
 user_details = pd.read_csv('data/UserDetails.csv')
 cooking_sessions = pd.read_csv('data/CookingSessions.csv')
 order_details = pd.read_csv(‘data/OrderDetails.csv')
@@ -45,21 +45,21 @@ user_details['age'] = user_details[‘age'].fillna(user_details['age'].median())
 
 2.3 Data Transformation
 Once the data was cleaned, the datasets were merged using the user_id field. This allowed us to combine the demographic data with cooking sessions and order details, providing a comprehensive view of each user’s behavior.
-# Merge UserDetails and CookingSessions on user_id
+Merge UserDetails and CookingSessions on user_id
 merged_data = pd.merge(cooking_sessions, user_details, on='user_id', how='left')
 
-# Merge the result with OrderDetails on user_id
+Merge the result with OrderDetails on user_id
 merged_data = pd.merge(merged_data, order_details, on='user_id', how='left')
 
 3. Exploratory Data Analysis (EDA)
 3.1 Descriptive Statistics
 Basic descriptive statistics were generated to understand the central tendency, spread, and distribution of the data. This includes measures such as mean, median, and standard deviation for numerical columns, and frequency counts for categorical variables.
 
-# Basic statistics for numeric columns
+Basic statistics for numeric columns
 print(merged_data.describe())
 For categorical variables like gender and location, we examined the distribution of users across these categories.
 
-# Check distribution of categorical variables
+Check distribution of categorical variables
 print(merged_data['gender'].value_counts())
 print(merged_data[‘location'].value_counts())
 
@@ -71,10 +71,10 @@ Order Value by Age: We grouped data by age and calculated the average order valu
 Cooking Session Duration and Order Value: We explored the correlation between cooking session duration and order value.
 
 
-# Average order value by age
+Average order value by age
 order_value_by_age = merged_data.groupby('age')['order_value'].mean()
 
-# Correlation between session duration and order values
+Correlation between session duration and order values
 correlation = merged_data[‘session_duration'].corr(merged_data['order_value'])
 
 3.3 Visualizations
